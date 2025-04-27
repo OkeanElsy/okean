@@ -1,0 +1,22 @@
+from aiogram import Bot, Dispatcher, types
+from aiogram.utils import executor
+
+# Bot token from BotFather
+API_TOKEN = '7839231293:AAEcqAHRezck_VoE1HjBwg0id_tWt-cAnxw'
+
+# Initialize bot and dispatcher
+bot = Bot(token=API_TOKEN)
+dp = Dispatcher(bot)
+
+# Command handler for /start
+@dp.message_handler(commands=['start'])
+async def send_welcome(message: types.Message):
+    await message.reply("Salom! Men Telegram botman. Sizga qanday yordam bera olaman?")
+
+# Echo handler for text messages
+@dp.message_handler()
+async def echo_message(message: types.Message):
+    await message.reply(message.text)
+
+if __name__ == '__main__':
+    executor.start_polling(dp, skip_updates=True)
